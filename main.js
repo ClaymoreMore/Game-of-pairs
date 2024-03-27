@@ -1,5 +1,6 @@
-import { Container } from "./components/Container/Container";
-import { shuffleArr } from "./utils/utils";
+import { Container } from "./components/Container/Container.js";
+import { shuffleArr } from "./utils/utils.js";
+import { Card } from "./components/Card/Card.js";
 
 //TODO
 /**
@@ -24,6 +25,8 @@ import { shuffleArr } from "./utils/utils";
   * 
   **/
 
+//  [1,2,3,6,8,9,4...] 16 
+
 function paint(button, color) {
   button.style.backgroundColor = color
 }
@@ -42,13 +45,23 @@ let greenCard = 0;
 // document.body.append(container)
 
 
-function Game() {
+(function Game() {
   const container = Container()
 
-  document.body.append(container)
+  const card = Card
 
+  //TODO 
+  /**
+    * generate cards  = shuffleArrayLength
+    * 
+    * append > container > body
+    **/
+  shuffleArr.forEach((number, idx) => {
+    container.append(card(number))
+  })
   
-}
+  document.body.append(container)
+})() //IIFE
 
 
 function startGame(count) {
@@ -56,20 +69,21 @@ function startGame(count) {
   let defaultStyle
 
   for (let i = 0; i < count.length; i++) {
-    let card = document.createElement('button')
-    let string = document.createElement('string')
-    card.className = 'card'
-    card.id = 'div'
-    string.className = 'string'
-    string.id = 'str'
-    string.textContent = count[i]
-    container.appendChild(card)
-    cards = container.children
-    card.appendChild(string)
-    defaultStyle = card.style
+    // let card = document.createElement('button')
+    // let string = document.createElement('string')
+    // card.className = 'card'
+    // card.id = 'div'
+    // string.className = 'string'
+    // string.id = 'str'
+    // string.textContent = count[i]
+    // container.appendChild(card)
+    // cards = container.children
+    // card.appendChild(string)
+    // defaultStyle = card.style
     
     card.addEventListener('click', () => {
       string.style.display = 'inline';
+
       if (previousButton === null) {
         // ур1 если нет
         previousButton = card
@@ -141,7 +155,7 @@ function startGame(count) {
 
 
 
-startGame(shuffleArr) 
+// startGame(shuffleArr) 
 //Создать кнопку "Начать новую игру" - start game(shuffleArr)
 
 // 1. Клик по кнопке
