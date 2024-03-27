@@ -1,0 +1,24 @@
+.container {
+    padding-left: 500px;
+    padding-right: 500px;
+    }
+    
+.string {
+    font-size: 50px;
+    color: white;
+}
+.card {
+    padding: 0;
+    width: 100px;
+    height: 149px;
+    margin: 10px;
+    background-image: url(./download.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.btnNewGame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
