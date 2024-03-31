@@ -1,12 +1,16 @@
 export function Card(number) {
     const card = document.createElement('button')
-    const string = document.createElement('string')
+
+  
+    const string = document.createElement('span')
   
     card.className = 'card'
-    card.id = 'div'
+    card.id = number
   
-    string.className = 'string'
-    string.id = 'str'
+    string.className = 'hidden'
+    string.id = number
+
+    // data-card-num
   
     string.textContent = number
     // container.appendChild(card)
@@ -15,8 +19,6 @@ export function Card(number) {
     card.appendChild(string)
   
     // defaultStyle = card.style
-  
 
-    
     return card
 }

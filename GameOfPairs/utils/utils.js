@@ -25,5 +25,10 @@ function shuffle(arr) {
     return newArr
 }
 
+export function paint(element, color) {
+  element.style.borderColor = color
+}
+
 export const shuffleArr = shuffle(doubleNumberArray) 
+
 

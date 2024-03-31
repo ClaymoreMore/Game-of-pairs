@@ -1,18 +1,27 @@
 .container {
-    padding-left: 500px;
-    padding-right: 500px;
+    padding: 40px 15px;
+    max-width: 557px;
+    margin: 0 auto;
     }
     
-.string {
+.hidden {
+    font-size: 0;
+    color: transparent;
+    /* transition: 2s  ease-in-out; */
+}
+    
+.openNumberCard {
     font-size: 50px;
     color: white;
+    
 }
+
 .card {
     padding: 0;
     width: 100px;
     height: 149px;
     margin: 10px;
-    background-image: url(./download.jpg);
+    background-image: url(../download.jpg);
     background-repeat: no-repeat;
     background-size: contain;
 }
