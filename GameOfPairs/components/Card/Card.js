@@ -1,4 +1,4 @@
-export function Card(number) {
+export function New(number) {
     const card = document.createElement('button')
 
   
@@ -7,7 +7,7 @@ export function Card(number) {
     card.className = 'card'
     card.id = number
   
-    string.className = 'hidden'
+    string.className = 'openNumberCard'
     string.id = number
 
     // data-card-num
@@ -22,3 +22,16 @@ export function Card(number) {
 
     return card
 }
+
+export function showNumber(card) {
+    card.firstChild.classList.remove('hidden')
+    card.firstChild.classList.add('openNumberCard')
+}
+
+export function hideNumber(card) {
+    card.firstChild.classList.remove('openNumberCard')
+    card.firstChild.classList.add('hidden')
+}
+
+
+

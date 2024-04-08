@@ -1,6 +1,6 @@
 import { Container } from "./components/Container/Container.js";
 import { shuffleArr } from "./utils/utils.js";
-import { Card } from "./components/Card/Card.js";
+import * as Card from './components/Card/Card.js';
 import { paint } from "./utils/utils.js";
 //TODO
 /**
@@ -58,7 +58,7 @@ let greenCard = 0;
 (function Game() {
   const container = Container() // return div
 
-  const card = Card
+  const createCard = Card.New
 
   //TODO 
   /**
@@ -78,53 +78,66 @@ let greenCard = 0;
 
   let prevCard = null;
   let defaultStyle;
-
+  let cardsList = [];
   let clickedButtons = [];
 
 
   shuffleArr.forEach((number, idx) => {
-    const newCard = card(number);
+    const newCard = createCard(number);
 
     container.append(newCard)
+    cardsList.push(newCard)
 
     newCard.addEventListener('click', function () {
       if (clickedButtons.length > 2) {
         return
       }
 
-      console.log(`//main.js - line: 95 ->> clickedButtons`, clickedButtons)
-
       const currentCard = this
       const spanCard = this.firstChild
 
-      spanCard.classList.add('openNumberCard')
-      spanCard.classList.toggle('hidden')
+      // spanCard.classList.add('openNumberCard')
+      // spanCard.classList.toggle('hidden')
+      Card.showNumber(currentCard)
       
       if (prevCard === null) {
         prevCard = currentCard
         clickedButtons.push(currentCard)
       } else {
-        // compare numbers
         clickedButtons.push(currentCard)
-
-        if (prevCard.firstChild.id === spanCard.id) {
-          paint(prevCard, 'green')
-          paint(currentCard, 'green')
+        // compare numbers
+        // clickedButtons.push(currentCard)
+        if (prevCard === currentCard) {
+          spanCard.classList.add('hidden')
+          spanCard.classList.toggle('openNumberCard')
+          prevCard = null
+        } else {
+          if (prevCard.firstChild.id === spanCard.id) {
+          prevCard.classList.add('winCard')
+          currentCard.classList.add('winCard')
+          prevCard.classList.remove('card')
+          currentCard.classList.remove('card')
           prevCard.disabled = true
           currentCard.disabled = true
           prevCard = null
-        } 
+        }
         else {
-          console.log(`//main.js - line: 108 ->> `, )
           spanCard.classList.toggle('hidden')
           prevCard.firstChild.classList.toggle('hidden')
+          let cards = document.getElementsByClassName('card') // [but,but,but...] -> [0],[1].. -> disabled
+          for (let card of cards) {
+            card.disabled = true
+          }                             // в данном цикле происходит перебор buttons и отключение интерфейса у каждой кнопки по порядку
 
           setTimeout(() => {
             spanCard.classList.toggle('openNumberCard')
             prevCard.firstChild.classList.toggle('openNumberCard')
+            for (let card of cards) {
+              card.disabled = false
+            }
             prevCard = null
           }, 1_000)
-        }
+        }}
 
         clickedButtons = [];
 
@@ -135,6 +148,20 @@ let greenCard = 0;
   })
 
   document.body.append(container)
+
+  setTimeout(() => {
+    cardsList.forEach((card) => {
+      Card.hideNumber(card)
+    })
+  }, 5000)
+
+  setTimeout(() => {
+    let cards = document.getElementsByClassName('card')
+    for (let card of cards) {
+      card.disabled = true
+    }
+    alert('Игра окончена')
+  }, 100000)
 })() //IIFE
 
 
@@ -193,23 +220,7 @@ function startGame(count) {
       previousButton.disabled = true
       card.disabled = true
       previousButton = null
-      if (greenCard === 16) {
-        greenCard = 0
-        let divForBtn = document.createElement('div')
-        divForBtn.className = 'btnNewGame'
-        document.body.append(divForBtn)
-        let btnStart = document.createElement('button')
-        btnStart.textContent = 'Начать новую игру'
-        divForBtn.append(btnStart)
-        btnStart.addEventListener('click', () => {
-          cleanUp()
-          startGame(shuffleArr)
-          clearTimeout(setTimeout)
-          btnStart.style.display = "none";
-        })
-      }
-
-
+      
     })
   }
 
