@@ -1,8 +1,67 @@
 import { Container } from "./components/Container/Container.js";
-import { shuffleArr } from "./utils/utils.js";
+import { getNumArray } from "./utils/utils.js";
 import { Card, showNumber, hideNumber } from './components/Card/Card.js';
 
-(function Game() {
+//TODO
+/**
+  *
+  * верстка
+  * 
+  * form => submit=startGame
+  * 
+  * 
+  *  огрничить числа вводимые значения
+  *  
+  * 
+  * 
+  * fn startGame(params) {
+  * 
+  *  const {1, 2} = params // object 
+  * 
+  * 
+  * 
+  *  
+  *  shuffleArr( 1 * 2) => [****]
+  * 
+  * }
+  * 
+  * Gamee([****])
+  * 
+  **/
+
+
+
+const form = document.getElementById('form')
+form.addEventListener('formdata', (event) => {
+  // submit
+  
+  event.preventDefault()
+
+  const formData = event.formData;
+
+  
+  
+  const horizNum = Number(formData.get("horizontal"))
+  const vertNum = Number(formData.get("vertical"))
+  
+
+  //TODO
+  /**
+    *  проверка на пустые переменные чисел
+    * 
+    * const numbers =  getNumArray( hor * verticalNum)
+    * 
+    * 
+    **/
+  
+  const numberArr = getNumArray(horizNum * vertNum)
+  Game(numberArr)
+
+  
+
+})
+
+function Game(cardArray) {
   const container = Container() // return div
 
   const createCard = Card
@@ -13,7 +72,7 @@ import { Card, showNumber, hideNumber } from './components/Card/Card.js';
   let clickedButtons = [];
 
 
-  shuffleArr.forEach((number, idx) => {
+  cardArray.forEach((number, idx) => {
     const newCard = createCard(number);
 
     container.append(newCard)
@@ -105,7 +164,7 @@ import { Card, showNumber, hideNumber } from './components/Card/Card.js';
     }
     alert('Игра окончена')
   }, 100000)
-})() //IIFE
+}
 
 
 // startGame(shuffleArr) 

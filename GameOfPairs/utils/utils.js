@@ -9,8 +9,6 @@ function createNumbersArray(count) {
     return myArray
   }
 
-  const doubleNumberArray = createNumbersArray(8)
-
 function shuffle(arr) {
   const newArr = [...arr];
   for (let i = 0; i < newArr.length; i++) {
@@ -29,6 +27,15 @@ export function paint(element, color) {
   element.style.borderColor = color
 }
 
-export const shuffleArr = shuffle(doubleNumberArray) 
+// export const shuffleArr = shuffle(doubleNumberArray) // remove
 
 
+export function getNumArray(number) {
+
+  const doubleNumberArray = createNumbersArray(number)
+
+  const shuffleArr = shuffle(doubleNumberArray)
+
+  return shuffleArr
+
+}
