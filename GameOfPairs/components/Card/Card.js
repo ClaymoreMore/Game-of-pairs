@@ -1,4 +1,4 @@
-export function New(number) {
+export function Card(number) {
     const card = document.createElement('button')
 
   
@@ -22,6 +22,8 @@ export function New(number) {
 
     return card
 }
+
+// перенести в ./helpers/ с одноименными названиями
 
 export function showNumber(card) {
     card.firstChild.classList.remove('hidden')
