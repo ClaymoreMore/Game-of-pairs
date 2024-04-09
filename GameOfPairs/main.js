@@ -34,21 +34,10 @@ import { Card, showNumber, hideNumber } from './components/Card/Card.js';
 const form = document.getElementById('form')
 form.addEventListener('submit', (event) => {
   event.preventDefault()
-  const horizNumObj = document.getElementById('horizontal')
-  const horizNum = horizNumObj.value 
-  const verticalNumObj = document.getElementById('vertical')
-  const vertNum = verticalNumObj.value 
-
-  //TODO
-  /**
-    *  проверка на пустые переменные чисел
-    * 
-    * const numbers =  getNumArray( hor * verticalNum)
-    * 
-    * 
-    **/
+  const numCards = document.getElementById('numCards')
+  const numberCard = numCards.value 
   
-  const numberArr = getNumArray(horizNum * vertNum)
+  const numberArr = getNumArray(numberCard)
   Game(numberArr)
 })
 
@@ -58,12 +47,11 @@ function Game(cardArray) {
   const createCard = Card
 
   let prevCard = null;
-  let defaultStyle;
   let cardsList = [];
   let clickedButtons = [];
 
 
-  cardArray.forEach((number, idx) => {
+  cardArray.forEach((number) => {
     const newCard = createCard(number);
 
     container.append(newCard)
@@ -150,7 +138,6 @@ function Game(cardArray) {
 }
 
 
-// startGame(shuffleArr) 
 //Создать кнопку "Начать новую игру" - start game(shuffleArr)
 
 // 1. Клик по кнопке
