@@ -32,18 +32,12 @@ import { Card, showNumber, hideNumber } from './components/Card/Card.js';
 
 
 const form = document.getElementById('form')
-form.addEventListener('formdata', (event) => {
-  // submit
-  
+form.addEventListener('submit', (event) => {
   event.preventDefault()
-
-  const formData = event.formData;
-
-  
-  
-  const horizNum = Number(formData.get("horizontal"))
-  const vertNum = Number(formData.get("vertical"))
-  
+  const horizNumObj = document.getElementById('horizontal')
+  const horizNum = horizNumObj.value 
+  const verticalNumObj = document.getElementById('vertical')
+  const vertNum = verticalNumObj.value 
 
   //TODO
   /**
@@ -56,9 +50,6 @@ form.addEventListener('formdata', (event) => {
   
   const numberArr = getNumArray(horizNum * vertNum)
   Game(numberArr)
-
-  
-
 })
 
 function Game(cardArray) {
@@ -94,12 +85,6 @@ function Game(cardArray) {
       const currentCard = this
       const spanCard = this.firstChild
 
-      //TODO 
-      /**
-        * не оставлять закомментированный код. он есть в истории коммитов если надо вернуть.
-        **/
-      // spanCard.classList.add('openNumberCard')
-      // spanCard.classList.toggle('hidden')
       showNumber(currentCard)
       
       if (prevCard === null) {
@@ -107,8 +92,6 @@ function Game(cardArray) {
         clickedButtons.push(currentCard)
       } else {
         clickedButtons.push(currentCard)
-        // compare numbers
-        // clickedButtons.push(currentCard)
         if (prevCard === currentCard) {
           spanCard.classList.add('hidden')
           spanCard.classList.toggle('openNumberCard')
