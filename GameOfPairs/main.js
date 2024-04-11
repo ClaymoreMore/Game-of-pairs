@@ -140,7 +140,6 @@ function Game(cardArray) {
               * 
               * cancel  => null
               * 
-              * 
               **/
 
             if (winCards.length * 2 === cardArray.length) {
